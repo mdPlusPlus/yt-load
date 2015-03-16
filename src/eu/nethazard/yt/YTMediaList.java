@@ -484,9 +484,10 @@ public class YTMediaList {
 		/*
 		 * 266,138 = 4k
 		 * 264 = 2k
-		 * (266 and 298 are new, experimental)
+		 * (266, 299, and 298 are new, experimental)
+		 * (298, 299 -> 60 fps)
 		 */
-		int[] videoPrioItags = new int[] {266, 138, 264, 137, 298, 136, 135, 134, 133, 160};
+		int[] videoPrioItags = new int[] {266, 138, 264, 299, 137, 298, 136, 135, 134, 133, 160};
 		//TODO are there more mp4 video itags?
 		return getFromFirstFoundItag(getVideoList(), videoPrioItags);
 	}
