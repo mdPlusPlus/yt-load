@@ -1,0 +1,8 @@
+Windows:
+http://ffmpeg.zeranoe.com/builds/
+
+Linux:
+http://ffmpeg.gusari.org/static/
+
+Mac OSX:
+http://ffmpegmac.net/
