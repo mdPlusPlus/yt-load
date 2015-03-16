@@ -543,4 +543,20 @@ public class YTMediaList {
 
 		return itagList;
 	}
+	
+	public void printAvailableItags(){
+		List<Integer> itagList = this.getAvailableItags();
+		StringBuilder sb = new StringBuilder();
+		sb.append("available itags [");
+		sb.append(itagList.size());
+		sb.append("]: ");
+		for(int i = 0; i < itagList.size(); i++){
+			Integer current = itagList.get(i);
+			sb.append(current.toString());
+			if(!current.equals(itagList.get(itagList.size()-1))) {
+				sb.append(", ");
+			}
+		}
+		System.out.println(sb.toString());
+	}
 }

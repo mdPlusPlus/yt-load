@@ -107,6 +107,7 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 				
 				Object[] rowEntries = new Object[]{number, toMp3, title, length, id, url, status, remove};
 				System.out.println("add: " + number + " " + toMp3 + " " + title + " " + length + " " + id + " " +  url + " " + status + " " + remove);
+				yt.printAvailableItags();
 				
 				//TODO is already in table?
 				
