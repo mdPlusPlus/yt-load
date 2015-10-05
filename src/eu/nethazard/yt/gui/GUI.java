@@ -129,15 +129,14 @@ public class GUI extends JFrame implements ClipboardOwner{
 				SwingWorker<Void, StatusUpdate> worker = new SwingWorker<Void, StatusUpdate>(){
 					@Override
 					protected Void doInBackground() throws Exception {
-						// TODO Auto-generated method stub
 						try{
 							List<YTMediaList> toDownload = table.getEntries();
 							if(toDownload != null && !toDownload.isEmpty()){
 								JTable tbl = table.getJTable();
 								for(int i = 0; i < toDownload.size(); i++){
-									//TODO
-									publish(new StatusUpdate("downloading", i));
 									YTMediaList current = toDownload.get(i);
+									publish(new StatusUpdate("downloading", i));
+									//TODO check which itags to download from table (when implemented)
 									boolean toMp3 = ((Boolean) tbl.getValueAt(i, 1)).booleanValue(); //column 1 -> toMp3?
 									if(toMp3){
 										//download best audio and convert to mp3

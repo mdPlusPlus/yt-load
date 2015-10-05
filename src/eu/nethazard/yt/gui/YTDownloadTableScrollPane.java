@@ -60,6 +60,8 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 			}
 		};
 		table.setModel(model);
+
+		//TODO replace 'to mp3?' with video and audio selection and act accordingly
 			
 		//set min and max column width
 		table.getColumnModel().getColumn(0).setMaxWidth(20); //#

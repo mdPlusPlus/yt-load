@@ -134,9 +134,13 @@ public class YTMedia {
 		File f = new File(path);
 		if(!f.exists() || (f.exists() && Config.OVERWRITE_EXISTING_FILES)){
 			try {
+				if(Config.VERBOSE){
+					System.out.println("Downloading to " + f.getAbsolutePath());
+				}
+
 				BufferedInputStream in = new BufferedInputStream(url.openStream());
 				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(path));
-				
+
 				byte[] buffer = new byte[4096];
 				int read;
 				while((read = in.read(buffer)) != -1){
@@ -145,6 +149,10 @@ public class YTMedia {
 				
 				in.close();
 				out.close();
+
+				if(Config.VERBOSE){
+					System.out.println("Download finished");
+				}
 			}
 			catch (IOException e) {
 				path = "null";
