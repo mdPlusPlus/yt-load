@@ -11,11 +11,13 @@
 package eu.nethazard.yt;
 
 public class Config {
+
+	public static final boolean VERBOSE = true;
 	
-	public static boolean OVERWRITE_EXISTING_FILES = true;
+	public static final boolean OVERWRITE_EXISTING_FILES = true;
 	
-	public static boolean REMOVE_TRACKS_AFTER_CONVERTING = true;
-	public static boolean REMOVE_TRACKS_AFTER_MUXING = true;
+	public static final boolean REMOVE_TRACKS_AFTER_CONVERTING = true;
+	public static final boolean REMOVE_TRACKS_AFTER_MUXING = true;
 	
 	private final static String guiVersion = "1.0.0";
 	private final static String libraryVersion = "1.0.3";

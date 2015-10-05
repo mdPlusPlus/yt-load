@@ -184,8 +184,7 @@ public class GUI extends JFrame implements ClipboardOwner{
 	
 	@Override
 	public void lostOwnership(Clipboard clipboard, Transferable contents) {
-		System.out.println("lost clipboard!");
-		
+
 		try{
 			Transferable current = clipboard.getContents(this);
 			//current = Toolkit.getDefaultToolkit().getSystemClipboard().getContents(this);
@@ -199,7 +198,7 @@ public class GUI extends JFrame implements ClipboardOwner{
 							BufferedReader br = new BufferedReader(r);
 							String read;
 							while((read = br.readLine()) != null){
-								//TODO impelemnt as SwingWorker?
+								//TODO implement as SwingWorker?
 								table.addEntry(read);
 							}
 						}

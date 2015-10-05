@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 
+import eu.nethazard.yt.Config;
 import eu.nethazard.yt.YTMediaList;
 import eu.nethazard.yt.YTMediaUtil;
 
@@ -106,7 +107,11 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 				String remove = "remove";
 				
 				Object[] rowEntries = new Object[]{number, toMp3, title, length, id, url, status, remove};
-				System.out.println("add: " + number + " " + toMp3 + " " + title + " " + length + " " + id + " " +  url + " " + status + " " + remove);
+
+				if(Config.VERBOSE) {
+					System.out.println("add: " + number + " " + toMp3 + " " + title + " " + length + " " + id + " " +  url + " " + status + " " + remove);
+				}
+
 				yt.printAvailableItags();
 				
 				//TODO is already in table?

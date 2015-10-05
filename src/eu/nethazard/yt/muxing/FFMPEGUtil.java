@@ -55,10 +55,6 @@ public class FFMPEGUtil {
 			String audio = audioFile.getAbsolutePath();
 			
 			String[] command = new String[]{ffmpeg, "-i", video, "-i", audio, "-c", "copy", "-shortest", target.getAbsolutePath()};
-			for(String s : command){
-				System.out.println(s);
-			}
-			
 			
 			if(target.exists() && Config.OVERWRITE_EXISTING_FILES){
 				target.delete();

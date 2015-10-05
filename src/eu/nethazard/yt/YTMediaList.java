@@ -114,13 +114,13 @@ public class YTMediaList {
 			/*
 			//TODO remove debug code
 			for(int i  = 0; i < dashList.size(); i++){
-				System.out.println("dashList.get(" + i + "): " + dashList.get(i));
+				System.out.println("dashList.get(" + i + "): " + dashList.get(i)); //TODO check verbosity
 			}
 			for(int i  = 0; i < fmtsList.size(); i++){
-				System.out.println("fmtsList.get(" + i + "): " + fmtsList.get(i));
+				System.out.println("fmtsList.get(" + i + "): " + fmtsList.get(i)); //TODO check verbosity
 			}
 			for(int i  = 0; i < adaptiveFmtsList.size(); i++){
-				System.out.println("adaptiveFmtsList.get(" + i + "): " + adaptiveFmtsList.get(i));
+				System.out.println("adaptiveFmtsList.get(" + i + "): " + adaptiveFmtsList.get(i)); //TODO check verbosity
 			}
 			*/
 			
@@ -371,7 +371,7 @@ public class YTMediaList {
 		for(int i = 0; i < list.size(); i++){
 			int currentItag = list.get(i).getItag();
 			if(index == -1){
-				//System.out.println("list.get(" + i +").getItag()=" + currentItag);
+				//System.out.println("list.get(" + i +").getItag()=" + currentItag); //TODO check verbosity
 				if(currentItag == itag){
 					index = i;
 				}
