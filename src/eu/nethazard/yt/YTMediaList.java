@@ -91,7 +91,7 @@ public class YTMediaList {
 	private YTMediaList(URL youtubeURL) throws IOException{
 		this.youtubeURL = stripUrl(youtubeURL);
 		ytMediaList = new ArrayList<YTMedia>();
-		playerConfig 	= getPlayerConfigString();
+		playerConfig 	= getPlayerConfigString(); //TODO could be null when index is -1
 		JSONObject json = new JSONObject(playerConfig).getJSONObject("args");
 		title 			= json.getString("title");
 		youtubeID 		= json.getString("video_id");
@@ -186,9 +186,10 @@ public class YTMediaList {
 				}
 				currentIndex++;
 			}
-			
-			if(playerStringIndex == -1){
+
+			if(playerStringIndex == -1){ //TODO when age-gated try https://www.youtube.com/embed/VIDEO_ID
 				System.err.println("playerStringIndex == -1");
+				System.err.println("YouTube: \"Melde dich an, um dein Alter zu bestätigen\"");
 			}
 			else{
 				String removeStart = "<script>var ytplayer = ytplayer || {};ytplayer.config = ";

@@ -127,7 +127,7 @@ public class FFMPEGUtil {
 				System.err.println("OS not supported - OS is: " + getOSString());
 			}
 			else{
-				ffmpegLocation = "res" + File.separator + "ffmpeg" + File.separator + getOSString() + File.separator + "ffmpeg";
+				ffmpegLocation = "res" + File.separator + "ffmpeg" + File.separator + getOSString() + File.separator + "ffmpeg"; //TODO change so we can put into .jar
 				if(os.equals("win")){
 					ffmpegLocation = ffmpegLocation + ".exe";
 				}
