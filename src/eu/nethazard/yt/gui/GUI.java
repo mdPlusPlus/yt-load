@@ -149,6 +149,9 @@ public class GUI extends JFrame implements ClipboardOwner{
 									publish(new StatusUpdate("finished", i));
 								}
 							}
+							if(Config.VERBOSE) {
+								System.out.println("All jobs finished.");
+							}
 						}
 						catch(IOException | InterruptedException ex){
 							//TODO

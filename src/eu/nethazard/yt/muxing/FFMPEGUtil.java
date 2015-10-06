@@ -13,6 +13,10 @@ import eu.nethazard.yt.Config;
 public class FFMPEGUtil {
 	
 	public static boolean convertToMp3(File audioFile, File target) throws IOException, InterruptedException{
+		if (Config.VERBOSE) {
+			System.out.println("convertToMp3(...)");
+		}
+
 		boolean result = false;
 		
 		File ffmpegBin = getFfmpegBin();
@@ -29,8 +33,18 @@ public class FFMPEGUtil {
 			
 			if(!target.exists()){
 				ProcessBuilder pb = new ProcessBuilder(command);
+				pb.redirectInput(ProcessBuilder.Redirect.INHERIT);
+				pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+				pb.redirectError(ProcessBuilder.Redirect.INHERIT);
+
 				Process p = pb.start();
+				if(Config.VERBOSE) {
+					System.out.println("Converting started ...");
+				}
 				p.waitFor();
+				if(Config.VERBOSE) {
+					System.out.println("Converting finished.");
+				}
 				if(Config.REMOVE_TRACKS_AFTER_CONVERTING){
 					audioFile.delete();
 				}
@@ -46,6 +60,10 @@ public class FFMPEGUtil {
 	}
 	
 	public static boolean mux(File videoFile, File audioFile, File target) throws IOException, InterruptedException{
+		if (Config.VERBOSE) {
+			System.out.println("mux(...)");
+		}
+
 		boolean result = false;
 		
 		File ffmpegBin = getFfmpegBin();
@@ -62,8 +80,20 @@ public class FFMPEGUtil {
 			
 			if(!target.exists()){
 				ProcessBuilder pb = new ProcessBuilder(command);
+				pb.redirectInput(ProcessBuilder.Redirect.INHERIT);
+				pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+				pb.redirectError(ProcessBuilder.Redirect.INHERIT);
+
 				Process p = pb.start();
+				if(Config.VERBOSE) {
+					System.out.println("Muxing started ...");
+				}
+
 				p.waitFor();
+				if(Config.VERBOSE) {
+					System.out.println("Muxing finished.");
+				}
+
 				if(Config.REMOVE_TRACKS_AFTER_MUXING){
 					videoFile.delete();
 					audioFile.delete();

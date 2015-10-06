@@ -135,7 +135,7 @@ public class YTMedia {
 		if(!f.exists() || (f.exists() && Config.OVERWRITE_EXISTING_FILES)){
 			try {
 				if(Config.VERBOSE){
-					System.out.println("Downloading to " + f.getAbsolutePath());
+					System.out.println("Downloading to " + f.getAbsolutePath() + " ...");
 				}
 
 				BufferedInputStream in = new BufferedInputStream(url.openStream());
@@ -144,6 +144,9 @@ public class YTMedia {
 				byte[] buffer = new byte[4096];
 				int read;
 				while((read = in.read(buffer)) != -1){
+					if(Config.VERBOSE){
+						System.out.print('.');
+					}
 					out.write(buffer, 0, read);
 				}
 				
@@ -151,7 +154,7 @@ public class YTMedia {
 				out.close();
 
 				if(Config.VERBOSE){
-					System.out.println("Download finished");
+					System.out.println("\nDownload finished.");
 				}
 			}
 			catch (IOException e) {
