@@ -176,7 +176,7 @@ public class YTMediaList {
 
 			if(playerStringIndex == -1){ //TODO when age-gated try https://www.youtube.com/embed/VIDEO_ID
 				System.err.println("playerStringIndex == -1");
-				System.err.println("YouTube: \"Melde dich an, um dein Alter zu best‰tigen\"");
+				System.err.println("YouTube: \"Melde dich an, um dein Alter zu best√§tigen\"");
 			}
 			else{
 				String removeStart = "<script>var ytplayer = ytplayer || {};ytplayer.config = ";

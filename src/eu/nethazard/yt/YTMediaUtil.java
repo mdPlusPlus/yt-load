@@ -19,9 +19,9 @@ public class YTMediaUtil {
 		allowedCharsBuilder.append("0123456789");
 		allowedCharsBuilder.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 		allowedCharsBuilder.append("abcdefghijklmnopqrstuvwxyz");
-		allowedCharsBuilder.append("ÄÖÜ");
-		allowedCharsBuilder.append("äöü");
-		allowedCharsBuilder.append("ß");
+		allowedCharsBuilder.append("Ã„Ã–Ãœ");
+		allowedCharsBuilder.append("Ã¤Ã¶Ã¼");
+		allowedCharsBuilder.append("ÃŸ");
 		String allowedChars = allowedCharsBuilder.toString();
 		
 		for(int i = 0; i < cleanTitle.length(); i++){
