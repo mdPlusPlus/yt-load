@@ -5,10 +5,10 @@
  */
 package eu.nethazard.yt.muxing;
 
+import eu.nethazard.yt.Config;
+
 import java.io.File;
 import java.io.IOException;
-
-import eu.nethazard.yt.Config;
 
 public class FFMPEGUtil {
 	

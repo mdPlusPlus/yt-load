@@ -4,14 +4,10 @@
  */
 package eu.nethazard.yt;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
-
 import eu.nethazard.yt.muxing.FFMPEGUtil;
+
+import java.io.*;
+import java.net.URL;
 
 public class YTMedia {
 
@@ -166,11 +162,14 @@ public class YTMedia {
 		else{
 			System.err.println("file already exists: " + f.getAbsolutePath());
 		}
-		
+
 		return path;
 	}
 	
 	private String getFileExtension(){
+		if(Config.VERBOSE) {
+			System.out.println("type: " + type);
+		}
 		String ext = type.substring(type.indexOf("/") + 1);
 		if(!container){
 			String avType = type.substring(0, type.indexOf("/"));
@@ -180,6 +179,12 @@ public class YTMedia {
 			//example: x-flv
 			ext = ext.substring(2);
 		}
+
+		//for convenience only
+		if(type.equals("audio/mp4")) {
+			ext = "m4a";
+		}
+
 		return ext;
 	}
 	

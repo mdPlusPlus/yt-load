@@ -4,24 +4,20 @@
  */
 package eu.nethazard.yt.gui;
 
-import java.awt.Component;
-import java.util.List;
-
-import javax.swing.AbstractCellEditor;
-import javax.swing.JButton;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
-
-import eu.nethazard.yt.YTMediaList;
+import java.awt.*;
+import java.util.List;
 
 public class JButtonTableCellEditor extends AbstractCellEditor implements TableCellEditor{
 
 	private JButton button;
-	private List<YTMediaList> entries;
+	private List<Object[]> entries;
 
 
-	public JButtonTableCellEditor(List<YTMediaList> entries){
+
+	public JButtonTableCellEditor(List<Object[]> entries){
 		button = new JButton();
 		this.entries = entries;
 	}

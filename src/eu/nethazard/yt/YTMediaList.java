@@ -4,31 +4,18 @@
  */
 package eu.nethazard.yt;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
-
+import eu.nethazard.yt.muxing.FFMPEGUtil;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
-import eu.nethazard.yt.muxing.FFMPEGUtil;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.util.*;
 
 
 public class YTMediaList {
@@ -447,86 +434,105 @@ public class YTMediaList {
 	}
 	
 	public YTMedia getBestMuxed(){
-		/*
-		 * source: http://users.ohiohills.com/fmacall/YTCRACK.TXT
-		 * itag=  video  resolution/bitrate
-		 * value  type    ( w x h )  flags
-		 * =====  =====  ==================
-		 *   38    MP4   2048 x 1080
-		 *   37    MP4   1920 x 1080
-		 *   46    WEB   1920 x 1080 
-		 *   22    MP4   1280 x 720
-		 *   45    WEB   1280 x 720
-		 *   35    FLV    640 x 480
-		 *   44    WEB    640 x 480
-		 *   18    MP4    480 x 360
-		 *   34    FLV    480 x 360
-		 *   43    WEB    480 x 360
-		 *    5    FLV    320 x 240
-		 *   36    3GP    320 x 240
-		 *   17    3GP    176 x 144
-		 *   
-		 *   even more on http://www.jwz.org/hacks/youtubedown
-		 */
-		int[] muxedPrioItags = new int[]{38, 37, 46, 22, 45, 35, 44, 18, 34, 43, 5, 36, 17};
-		
-		return getFromFirstFoundItag(getMuxedList(), muxedPrioItags);
+		return getFromFirstFoundItag(getMuxedList(), Config.ITAGS_MUXED);
 	}
 	
 	public YTMedia getBestAudio(){
-		//only mp4 audio for muxing! (not vorbis, webm and others)
-		int[] audioPrioItags = new int[] {141, 140, 139};
-		//TODO are there more mp4 audio itags?
-		return getFromFirstFoundItag(getAudioList(), audioPrioItags);
+		//only mp4 audio for muxing! (not webm and others)
+		return getFromFirstFoundItag(getAudioList(), Config.ITAGS_AUDIO_MP4);
 	}
 	
 	public YTMedia getBestVideo(){
 		//only mp4 video for muxing! (not webm and others)
-		/*
-		 * 266,138 = 4k
-		 * 264 = 2k
-		 * (266, 299, and 298 are new, experimental)
-		 * (298, 299 -> 60 fps)
-		 */
-		int[] videoPrioItags = new int[] {266, 138, 264, 299, 137, 298, 136, 135, 134, 133, 160};
-		//TODO are there more mp4 video itags?
-		return getFromFirstFoundItag(getVideoList(), videoPrioItags);
+		return getFromFirstFoundItag(getVideoList(), Config.ITAGS_VIDEO_MP4);
 	}
 	
-	public String downloadAndMuxBest(String targetDir) throws FileNotFoundException, IOException{
-		YTMedia bestVideo = getBestVideo();
-		YTMedia bestAudio = getBestAudio();
-		
-		String ext = "mp4"; //hardcoded mp4 for now 
-		String path = targetDir + File.separator + YTMediaUtil.cleanTitle(title) + "(" + bestVideo.getItag() + "_" + bestAudio.getItag() + ")" + "." + ext;
-		
-		File f = new File(path);
-		if(!f.exists() || (f.exists() && Config.OVERWRITE_EXISTING_FILES)){
-			//download audio and video stream
-			String videoPath = bestVideo.downloadTo(targetDir);
-			String audioPath = bestAudio.downloadTo(targetDir);
-			
+	public String downloadAndMuxBest(String targetDir) throws FileNotFoundException, IOException {
+		return downloadAndMuxIfPossible(targetDir, getBestVideo().getItag(), getBestAudio().getItag());
+	}
+
+	public String downloadAndMuxIfPossible(String targetDir, int videoItag, int audioItag) throws FileNotFoundException, IOException {
+		YTMedia video = getYTMediaFromItag(videoItag);
+		YTMedia audio = getYTMediaFromItag(audioItag);
+
+		String ext = "";
+		boolean videoOnly = false;
+		boolean audioOnly = false;
+		if(video != null && audio == null){
+			//video only
+			ext = "mp4";
+			videoOnly = true;
+		}
+		if(video == null && audio != null){
+			//audio only
+			ext = "m4a";
+			audioOnly = true;
+		}
+		if(video != null && audio != null){
+			//video and audio
+			ext = "mp4";
+		}
+		if(video == null && audio == null){
+			//no YTMedia with according itag found
+			return null;
+		}
+
+
+		//download audio and video stream
+		String videoPath = "";
+		if(videoOnly) {
+			videoPath = video.downloadTo(targetDir);
+			if(Config.VERBOSE) {
+				System.out.println("videoPath: " + videoPath);
+			}
+			return videoPath;
+		}
+
+		String audioPath = "";
+		if(audioOnly){
+			audioPath = audio.downloadTo(targetDir);
+			if(Config.VERBOSE) {
+				System.out.println("audioPath: " + audioPath);
+			}
+			return audioPath;
+		}
+
+		if(!videoOnly && !audioOnly) {
 			//mux
-			File videoFile = new File(videoPath);
-			File audioFile = new File(audioPath);			
-			
-			try {
-				boolean successful = FFMPEGUtil.mux(videoFile, audioFile, f);
-				if(!successful){
-					path = null;
+			String muxPath = targetDir + File.separator + YTMediaUtil.cleanTitle(title) + "(" + videoItag + "_" + audioItag + ")" + "." + ext;
+			if(Config.VERBOSE) {
+				System.out.println("muxPath: " + muxPath);
+			}
+			File muxFile = new File(muxPath);
+			if(!muxFile.exists() || (muxFile.exists() && Config.OVERWRITE_EXISTING_FILES)){
+
+				videoPath = video.downloadTo(targetDir);
+				audioPath = audio.downloadTo(targetDir);
+				if(Config.VERBOSE) {
+					System.out.println("videoPath: " + videoPath);
+					System.out.println("audioPath: " + audioPath);
 				}
+				File videoFile = new File(videoPath);
+				File audioFile = new File(audioPath);
+
+				try {
+					boolean successful = FFMPEGUtil.mux(videoFile, audioFile, muxFile);
+					if (!successful) {
+						muxPath = null;
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+					muxPath = null;
+				}
+
+				return muxPath;
 			}
-			catch (InterruptedException e) {
-				e.printStackTrace();
-				path = null;
+			else{
+				System.err.println("file already exists: " + muxFile.getAbsolutePath());
 			}
 		}
-		else{
-			System.err.println("file already exists: " + f.getAbsolutePath());
-		}
-		
-		
-		return path;
+
+		return null;
 	}
 
 	public List<Integer> getAvailableItags(){
@@ -560,5 +566,49 @@ public class YTMediaList {
 			}
 		}
 		System.out.println(sb.toString());
+	}
+
+	public List<Integer> getAvailableAudioMp4Itags(){
+		List<Integer> audioMp4Itags = new LinkedList<Integer>();
+		List<Integer> itagList = this.getAvailableItags();
+		for(int i = 0; i < Config.ITAGS_AUDIO_MP4.length; i++) {
+			if (itagList.contains(Config.ITAGS_AUDIO_MP4[i])){
+				audioMp4Itags.add(Config.ITAGS_AUDIO_MP4[i]);
+			}
+		}
+
+		return audioMp4Itags;
+	}
+
+	public List<Integer> getAvailableVideoMp4Itags(){
+		List<Integer> videoMp4Itags = new LinkedList<Integer>();
+		List<Integer> itagList = this.getAvailableItags();
+		for(int i = 0; i < Config.ITAGS_VIDEO_MP4.length; i++) {
+			if (itagList.contains(Config.ITAGS_VIDEO_MP4[i])){
+				videoMp4Itags.add(Config.ITAGS_VIDEO_MP4[i]);
+			}
+		}
+
+		return videoMp4Itags;
+	}
+
+	public YTMedia getYTMediaFromItag(int itag) {
+		if(getAvailableItags().contains(itag)){
+			Iterator<YTMedia> it = ytMediaList.iterator();
+			while(it.hasNext()) {
+				YTMedia current = it.next();
+				if(current.getItag() == itag) {
+
+					return current;
+				}
+			}
+
+			return null;
+		}
+		else {
+
+			return null;
+		}
+
 	}
 }
