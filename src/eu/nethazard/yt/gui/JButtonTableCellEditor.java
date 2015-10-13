@@ -15,28 +15,16 @@ import javax.swing.table.TableCellEditor;
 
 import eu.nethazard.yt.YTMediaList;
 
-/*
- * revert "special code" to get general implementation
- */
-
 public class JButtonTableCellEditor extends AbstractCellEditor implements TableCellEditor{
 
 	private JButton button;
-	
-	//special code
 	private List<YTMediaList> entries;
-	//
-	
-	public JButtonTableCellEditor() {
-		button = new JButton();
-	}
-	
-	//special code
+
+
 	public JButtonTableCellEditor(List<YTMediaList> entries){
 		button = new JButton();
 		this.entries = entries;
 	}
-	//
 	
 	@Override
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
@@ -48,8 +36,7 @@ public class JButtonTableCellEditor extends AbstractCellEditor implements TableC
 			label = value.toString();
 		}
 		button.setText(label);
-		
-		//special code
+
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		dtm.removeRow(row);
 		entries.remove(row);
@@ -58,7 +45,6 @@ public class JButtonTableCellEditor extends AbstractCellEditor implements TableC
 			//column 0 -> #
 			table.setValueAt(new Integer(i + 1), i, 0);
 		}
-		//
 		
 		fireEditingStopped();
 		//if you do not remove the row/button you return button and not null!
