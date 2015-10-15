@@ -13,10 +13,6 @@ import javax.swing.table.DefaultTableModel;
 import java.util.LinkedList;
 import java.util.List;
 
-/*
- * TODO:
- *  - remove button
- */
 public class YTDownloadTableScrollPane extends JScrollPane{
 
 	private List<Object[]> mediaListEntries;
@@ -42,7 +38,7 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 		model = new DefaultTableModel(new Object[][]{}, columnNames){
 			@Override
 			public boolean isCellEditable(int row, int col){
-				if(col == 1 || col==2 || col == 8){
+				if(col == 1 || col == 2 || col == 8){
 					// 1 -> "video"
 					// 2 -> "audio"
 					// 8 -> "remove"
@@ -127,9 +123,10 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 				
 				//TODO is already in table?
 
-				//mediaListEntries.add(yt);
 				mediaListEntries.add(new Object[]{yt, videoComboBox, audioComboBox});
 				model.addRow(rowEntries);
+
+				result = true;
 			}
 			
 		}

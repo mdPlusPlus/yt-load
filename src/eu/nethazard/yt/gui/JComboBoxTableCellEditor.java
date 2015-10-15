@@ -14,11 +14,13 @@ public class JComboBoxTableCellEditor extends AbstractCellEditor implements Tabl
 
 	@Override
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-		comboBox = (JComboBox<Integer>) value;
+		if(value instanceof JComboBox) {
+			comboBox = (JComboBox<Integer>) value;
+		}
 
 		fireEditingStopped();
 
-		return (JComboBox<Integer>) value;
+		return comboBox;
 	}
 	
 	@Override

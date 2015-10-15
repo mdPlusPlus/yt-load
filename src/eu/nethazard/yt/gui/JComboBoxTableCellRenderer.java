@@ -12,8 +12,11 @@ public class JComboBoxTableCellRenderer implements TableCellRenderer{
 
 	@Override
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int columns) {
-
-		return (JComboBox<Integer>) value;
+		if(value instanceof JComboBox) {
+			return (JComboBox<Integer>) value;
+		} else {
+			return null;
+		}
 	}
 	
 }
