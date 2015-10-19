@@ -2,7 +2,9 @@
  * @author Mathias Dickenscheid
  * @since 2014-09-07
  */
-package eu.nethazard.yt.gui;
+package eu.nethazard.yt;
+
+import eu.nethazard.yt.gui.GUI;
 
 import javax.swing.*;
 

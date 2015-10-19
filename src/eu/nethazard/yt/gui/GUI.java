@@ -4,9 +4,8 @@
  */
 package eu.nethazard.yt.gui;
 
-import eu.nethazard.yt.Config;
-import eu.nethazard.yt.gui.ConfigGUI;
-import eu.nethazard.yt.YTMediaList;
+import Config;
+import YTMediaList;
 
 import javax.swing.*;
 import java.awt.*;
