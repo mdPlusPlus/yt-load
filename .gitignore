@@ -3,6 +3,6 @@
 /.settings/
 .project
 /.idea/
-yt-load.iml
+*.iml
 /out/
 /download/
