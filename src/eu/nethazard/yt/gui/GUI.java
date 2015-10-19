@@ -5,6 +5,7 @@
 package eu.nethazard.yt.gui;
 
 import eu.nethazard.yt.Config;
+import eu.nethazard.yt.gui.ConfigGUI;
 import eu.nethazard.yt.YTMediaList;
 
 import javax.swing.*;
@@ -57,7 +58,7 @@ public class GUI extends JFrame implements ClipboardOwner{
 		setBounds(new Rectangle((int) (screensize.getWidth() / 2), (int) (screensize.getHeight() / 2)));
 		setLocation((int) (screensize.getWidth() / 4), (int) (screensize.getHeight() / 4));
 
-		setTitle("YouTube Downloader " + Config.GUI_VERSION);
+		setTitle("YouTube Downloader " + ConfigGUI.GUI_VERSION);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 	}

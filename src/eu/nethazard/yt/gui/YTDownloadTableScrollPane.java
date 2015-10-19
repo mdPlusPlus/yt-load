@@ -5,6 +5,7 @@
 package eu.nethazard.yt.gui;
 
 import eu.nethazard.yt.Config;
+import eu.nethazard.yt.gui.ConfigGUI;
 import eu.nethazard.yt.YTMediaList;
 import eu.nethazard.yt.YTMediaUtil;
 

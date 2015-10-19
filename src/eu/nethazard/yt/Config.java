@@ -12,15 +12,14 @@ package eu.nethazard.yt;
 
 public class Config {
 
+	public final static String LIBRARY_VERSION = "1.0.4";
+
 	public static boolean VERBOSE = true;
 	
 	public static boolean OVERWRITE_EXISTING_FILES = true;
 	
 	public static boolean REMOVE_TRACKS_AFTER_CONVERTING = true;
 	public static boolean REMOVE_TRACKS_AFTER_MUXING = true;
-	
-	public final static String GUI_VERSION = "1.1.0";
-	public final static String LIBRARY_VERSION = "1.0.4";
 
 	/**
 	 * ITAGS_MUXED
