@@ -4,9 +4,10 @@
  */
 package eu.nethazard.yt.gui;
 
-import Config;
-import YTMediaList;
-import YTMediaUtil;
+
+import eu.nethazard.yt.Config;
+import eu.nethazard.yt.YTMediaList;
+import eu.nethazard.yt.YTMediaUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
