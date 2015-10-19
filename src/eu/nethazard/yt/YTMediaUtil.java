@@ -45,7 +45,7 @@ public class YTMediaUtil {
 			isValidURL = false;
 		}
 		
-		if(isValidURL){
+		if(isValidURL){ //TODO add embed-URLs
 			if(	   str.startsWith("https://www.youtube.com/watch?v=")
 				|| str.startsWith("http://www.youtube.com/watch?v=") 
 				|| str.startsWith("www.youtube.com/watch?v=")

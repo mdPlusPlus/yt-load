@@ -77,7 +77,7 @@ public class YTMediaList {
 	
 	private YTMediaList(URL youtubeURL) throws IOException{
 		this.youtubeURL = stripUrl(youtubeURL);
-		ytMediaList = new ArrayList<YTMedia>();
+		ytMediaList 	= new ArrayList<YTMedia>();
 		playerConfig 	= getPlayerConfigString(); //TODO could be null when index is -1
 		JSONObject json = new JSONObject(playerConfig).getJSONObject("args");
 		title 			= json.getString("title");
