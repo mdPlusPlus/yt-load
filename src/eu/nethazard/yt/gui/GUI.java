@@ -160,7 +160,7 @@ public class GUI extends JFrame implements ClipboardOwner{
 								}
 							}
 
-
+							//TODO still buggy
 							table.getJTable().getColumnModel().getColumn(8).setCellEditor(new JButtonTableCellEditor(table.getEntries()));
 							table.getJTable().getColumnModel().getColumn(8).setCellRenderer(new JButtonTableCellRenderer());
 							//table.getJTable().repaint();
