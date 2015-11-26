@@ -8,6 +8,7 @@ import eu.nethazard.yt.Config;
 import eu.nethazard.yt.YTMediaList;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.datatransfer.*;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class GUI extends JFrame implements ClipboardOwner{
@@ -26,6 +29,8 @@ public class GUI extends JFrame implements ClipboardOwner{
 
 	private JTextField outputField;
 	private JButton browseButton;
+
+	private List<JComponent> disableWhileDownloadingGroup;
 
 	public GUI(){
 		super();
@@ -39,6 +44,8 @@ public class GUI extends JFrame implements ClipboardOwner{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		disableWhileDownloadingGroup = new LinkedList<>();
 
 		initFrame();
 		getContentPane().add(initTargetBar(), BorderLayout.NORTH);
@@ -71,6 +78,8 @@ public class GUI extends JFrame implements ClipboardOwner{
 		JLabel outputLabel= new JLabel("save to:");
 		outputField = new JTextField();
 		browseButton = new JButton("browse");
+
+		disableWhileDownloadingGroup.add(browseButton);
 
 		outputLabel.setPreferredSize(new Dimension(BUTTON_WIDTH, (int) outputLabel.getPreferredSize().getHeight()));
 
@@ -105,6 +114,9 @@ public class GUI extends JFrame implements ClipboardOwner{
 		downloadBar.setLayout(new BorderLayout());
 
 		JButton downloadButton = new JButton("download");
+
+		disableWhileDownloadingGroup.add(downloadButton); //TODO relabeling instead of disabling
+
 		downloadButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -112,6 +124,23 @@ public class GUI extends JFrame implements ClipboardOwner{
 					@Override
 					protected Void doInBackground() throws Exception {
 						try{
+							//clear status first
+							for (int i = 0; i<table.getJTable().getRowCount(); i++) {
+								table.getJTable().getModel().setValueAt("", i, 7); // 7 -> status
+							}
+
+							//disable certain elements
+							Iterator<JComponent> it = disableWhileDownloadingGroup.iterator();
+							while (it.hasNext()) {
+								it.next().setEnabled(false);
+							}
+
+							table.getJTable().getColumnModel().getColumn(8).setCellEditor(new DisabledJButtonTableCellEditor());
+							table.getJTable().getColumnModel().getColumn(8).setCellRenderer(new DisabledJButtonTableCellRenderer());
+							//table.getJTable().repaint();
+							((DefaultTableModel) table.getJTable().getModel()).fireTableDataChanged();
+
+
 							List<Object[]> toDownload = table.getEntries(); //YTMediaList, JComboBox, JComboBox
 							if(toDownload != null && !toDownload.isEmpty()){
 								for(int i = 0; i < toDownload.size(); i++){
@@ -130,6 +159,18 @@ public class GUI extends JFrame implements ClipboardOwner{
 									publish(new StatusUpdate("finished", i));
 								}
 							}
+
+
+							table.getJTable().getColumnModel().getColumn(8).setCellEditor(new JButtonTableCellEditor(table.getEntries()));
+							table.getJTable().getColumnModel().getColumn(8).setCellRenderer(new JButtonTableCellRenderer());
+							//table.getJTable().repaint();
+							((DefaultTableModel) table.getJTable().getModel()).fireTableDataChanged();
+
+							it = disableWhileDownloadingGroup.iterator();
+							while (it.hasNext()) {
+								it.next().setEnabled(true);
+							}
+
 							if(Config.VERBOSE) {
 								System.out.println("All jobs finished.");
 							}
