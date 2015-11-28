@@ -13,6 +13,8 @@ import java.awt.*;
 import java.awt.datatransfer.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -50,9 +52,7 @@ public class GUI extends JFrame implements ClipboardOwner{
 		initFrame();
 		getContentPane().add(initTargetBar(), BorderLayout.NORTH);
 		getContentPane().add(initDownloadBar(), BorderLayout.SOUTH);
-
-		table = new YTDownloadTableScrollPane();
-		getContentPane().add(table, BorderLayout.CENTER);
+		getContentPane().add(initTable(), BorderLayout.CENTER);
 
 		setUpClipboard();
 
@@ -199,6 +199,31 @@ public class GUI extends JFrame implements ClipboardOwner{
 		downloadBar.add(downloadButton, BorderLayout.CENTER);
 
 		return downloadBar;
+	}
+
+	private JComponent initTable(){
+		table = new YTDownloadTableScrollPane();
+
+		//TODO move to YTDownloadScrollPane and select file
+		table.getJTable().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent me) {
+				Point p = me.getPoint();
+				int row = table.getJTable().rowAtPoint(p);
+				if (me.getClickCount() == 2) {
+					System.out.println("Double-click at row " + row);
+					Desktop desktop = Desktop.getDesktop();
+					try {
+						desktop.open(new File(outputField.getText()));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+				}
+			}
+		});
+
+		return table;
 	}
 
 	private void setUpClipboard(){
