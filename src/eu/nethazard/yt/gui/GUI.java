@@ -70,7 +70,7 @@ public class GUI extends JFrame implements ClipboardOwner{
 	}
 
 	private JComponent initTargetBar(){
-		JFrame selfReference = this;
+		final JFrame selfReference = this;
 
 		JPanel bottomBar = new JPanel();
 		bottomBar.setLayout(new BorderLayout());
