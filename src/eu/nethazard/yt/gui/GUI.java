@@ -211,7 +211,9 @@ public class GUI extends JFrame implements ClipboardOwner{
 				Point p = me.getPoint();
 				int row = table.getJTable().rowAtPoint(p);
 				if (me.getClickCount() == 2) {
-					System.out.println("Double-click at row " + row);
+					if(Config.VERBOSE) {
+						System.out.println("Double-click at row " + row);
+					}
 					Desktop desktop = Desktop.getDesktop();
 					try {
 						desktop.open(new File(outputField.getText()));
