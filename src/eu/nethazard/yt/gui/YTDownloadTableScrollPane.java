@@ -101,9 +101,9 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 			if(yt != null){
 				int number = table.getRowCount() + 1;
 				List<Integer> videoList = yt.getAvailableVideoMp4Itags();
-				videoList.add(-1);
+				videoList.add(-1); //no video, audio only
 				List<Integer> audioList = yt.getAvailableAudioMp4Itags();
-				audioList.add(-1);
+				audioList.add(-1); //no audio, video only
 				Integer[] video = videoList.toArray(new Integer[videoList.size()]);
 				Integer[] audio = audioList.toArray(new Integer[audioList.size()]);
 				JComboBox<Integer> videoComboBox = new JComboBox<Integer>(video);
