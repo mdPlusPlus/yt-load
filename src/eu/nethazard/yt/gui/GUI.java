@@ -23,6 +23,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author mdPlusPlus
+ *
+ */
 public class GUI extends JFrame implements ClipboardOwner{
 
 	private final int BUTTON_WIDTH = 100;

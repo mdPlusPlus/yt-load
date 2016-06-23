@@ -10,6 +10,10 @@ import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * @author mdPlusPlus
+ *
+ */
 public class JButtonTableCellEditor extends AbstractCellEditor implements TableCellEditor{
 
 	private JButton button;

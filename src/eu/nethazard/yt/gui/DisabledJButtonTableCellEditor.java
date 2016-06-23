@@ -5,7 +5,8 @@ import javax.swing.table.TableCellEditor;
 import java.awt.*;
 
 /**
- * Created by mdPlusPlus on 26.11.2015.
+ * @author mdPlusPlus
+ * @since 26.11.2015
  */
 public class DisabledJButtonTableCellEditor extends AbstractCellEditor implements TableCellEditor {
 

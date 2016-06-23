@@ -8,6 +8,10 @@ import javax.swing.*;
 import javax.swing.table.TableCellEditor;
 import java.awt.*;
 
+/**
+ * @author mdPlusPlus
+ *
+ */
 public class JComboBoxTableCellEditor extends AbstractCellEditor implements TableCellEditor{
 
 	private JComboBox<Integer> comboBox;

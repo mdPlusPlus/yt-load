@@ -14,6 +14,10 @@ import javax.swing.table.DefaultTableModel;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author mdPlusPlus
+ *
+ */
 public class YTDownloadTableScrollPane extends JScrollPane{
 
 	private List<Object[]> mediaListEntries;

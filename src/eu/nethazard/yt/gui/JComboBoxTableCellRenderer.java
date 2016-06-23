@@ -8,6 +8,10 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
+/**
+ * @author mdPlusPlus
+ *
+ */
 public class JComboBoxTableCellRenderer implements TableCellRenderer{
 
 	@Override
