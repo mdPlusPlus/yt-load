@@ -72,8 +72,8 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 		table.getColumnModel().getColumn(5).setMinWidth(100); //YouTube ID
 		table.getColumnModel().getColumn(6).setMaxWidth(280); //URL
 		table.getColumnModel().getColumn(6).setMinWidth(280); //URL
-		table.getColumnModel().getColumn(7).setMaxWidth(80); //status
-		table.getColumnModel().getColumn(7).setMinWidth(80); //status
+		table.getColumnModel().getColumn(7).setMaxWidth(85); //status
+		table.getColumnModel().getColumn(7).setMinWidth(85); //status
 		table.getColumnModel().getColumn(8).setMaxWidth(78); //remove
 		table.getColumnModel().getColumn(8).setMinWidth(78); //remove
 		//table.getColumn("remove").setMaxWidth(78);
