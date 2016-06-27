@@ -1,9 +1,4 @@
-/**
- * @author Mathias Dickenscheid
- * @since 2014-09-07
- */
 package eu.nethazard.yt.gui;
-
 
 import eu.nethazard.yt.Config;
 import eu.nethazard.yt.YTMediaList;
@@ -16,7 +11,7 @@ import java.util.List;
 
 /**
  * @author mdPlusPlus
- *
+ * @since 2014-09-07
  */
 public class YTDownloadTableScrollPane extends JScrollPane{
 

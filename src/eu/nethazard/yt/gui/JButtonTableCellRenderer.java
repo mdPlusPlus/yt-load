@@ -1,7 +1,3 @@
-/**
- * @author Mathias Dickenscheid
- * @since 2014-09-07
- */
 package eu.nethazard.yt.gui;
 
 import javax.swing.*;
@@ -10,7 +6,7 @@ import java.awt.*;
 
 /**
  * @author mdPlusPlus
- *
+ * @since 2014-09-07
  */
 public class JButtonTableCellRenderer implements TableCellRenderer{
 
@@ -31,5 +27,5 @@ public class JButtonTableCellRenderer implements TableCellRenderer{
 
 		return button;
 	}
-	
+
 }

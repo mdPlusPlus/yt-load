@@ -1,7 +1,3 @@
-/**
- * @author Mathias Dickenscheid
- * @since 2014-09-07
- */
 package eu.nethazard.yt.gui;
 
 import eu.nethazard.yt.Config;
@@ -25,7 +21,7 @@ import java.util.List;
 
 /**
  * @author mdPlusPlus
- *
+ * @since 2014-09-07
  */
 public class GUI extends JFrame implements ClipboardOwner{
 
@@ -313,4 +309,3 @@ public class GUI extends JFrame implements ClipboardOwner{
 
 	}
 }
-

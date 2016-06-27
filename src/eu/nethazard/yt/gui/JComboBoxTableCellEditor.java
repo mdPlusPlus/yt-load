@@ -1,7 +1,3 @@
-/**
- * @author Mathias Dickenscheid
- * @since 2014-09-07
- */
 package eu.nethazard.yt.gui;
 
 import javax.swing.*;
@@ -10,7 +6,7 @@ import java.awt.*;
 
 /**
  * @author mdPlusPlus
- *
+ * @since 2014-09-07
  */
 public class JComboBoxTableCellEditor extends AbstractCellEditor implements TableCellEditor{
 
@@ -26,7 +22,7 @@ public class JComboBoxTableCellEditor extends AbstractCellEditor implements Tabl
 
 		return comboBox;
 	}
-	
+
 	@Override
 	public Object getCellEditorValue() {
 		return comboBox;
