@@ -23,11 +23,11 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 	private List<Object[]> mediaListEntries;
 	private JTable table;
 	private DefaultTableModel model;
-	
+
 	public YTDownloadTableScrollPane(){
 		//super();
 		mediaListEntries = new LinkedList<Object[]>(); //YTMediaList, JComboBox, JComboBox
-		
+
 		table = new JTable();
 
 		String[] columnNames = {"#",
@@ -39,7 +39,7 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 								"URL",
 								"status",
 								"remove"};
-		
+
 		model = new DefaultTableModel(new Object[][]{}, columnNames){
 			@Override
 			public boolean isCellEditable(int row, int col){
@@ -61,10 +61,10 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 		//set min and max column width
 		table.getColumnModel().getColumn(0).setMaxWidth(20); //#
 		table.getColumnModel().getColumn(0).setMinWidth(20); //#
-		table.getColumnModel().getColumn(1).setMaxWidth(44); //video
-		table.getColumnModel().getColumn(1).setMinWidth(44); //video
-		table.getColumnModel().getColumn(2).setMaxWidth(44); //audio
-		table.getColumnModel().getColumn(2).setMinWidth(44); //audio
+		table.getColumnModel().getColumn(1).setMaxWidth(52); //video
+		table.getColumnModel().getColumn(1).setMinWidth(52); //video
+		table.getColumnModel().getColumn(2).setMaxWidth(52); //audio
+		table.getColumnModel().getColumn(2).setMinWidth(52); //audio
 		//getColumn(3) - title?
 		table.getColumnModel().getColumn(4).setMaxWidth(60); //length
 		table.getColumnModel().getColumn(4).setMinWidth(60); //length
@@ -85,21 +85,21 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 
 		table.getColumnModel().getColumn(2).setCellRenderer(new JComboBoxTableCellRenderer());
 		table.getColumnModel().getColumn(2).setCellEditor(new JComboBoxTableCellEditor());
-		
+
 		table.getColumnModel().getColumn(8).setCellRenderer(new JButtonTableCellRenderer());
 		table.getColumnModel().getColumn(8).setCellEditor(new JButtonTableCellEditor(mediaListEntries));
 
 
 		setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED); 
+		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		setViewportView(table);
 	}
-	
-	
+
+
 	public boolean addEntry(String str){
 		//TODO implement as SwingWorker?
 		boolean result = false;
-		
+
 		if(YTMediaUtil.isYouTubeURL(str)){
 			YTMediaList yt = YTMediaList.fromString(str);
 			if(yt != null){
@@ -125,7 +125,7 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 					System.out.println("add: " + number + " videoComboBox audioComboBox " + title + " " + length + " " + id + " " +  url + " " + status + " " + remove);
 					yt.printAvailableItags();
 				}
-				
+
 				//TODO is already in table?
 
 				mediaListEntries.add(new Object[]{yt, videoComboBox, audioComboBox});
@@ -133,15 +133,15 @@ public class YTDownloadTableScrollPane extends JScrollPane{
 
 				result = true;
 			}
-			
+
 		}
 		else{
 			System.err.println("not a YouTube URL: " + str);
 		}
-		
+
 		return result;
 	}
-	
+
 	public JTable getJTable(){
 		return table;
 	}
