@@ -1,6 +1,3 @@
-[submodule "submodules/JSON-java/org/json"]
-	path = submodules/JSON-java/org/json
-	url = https://github.com/douglascrockford/JSON-java.git
 [submodule "submodules/yt-lib"]
 	path = submodules/yt-lib
 	url = https://github.com/mdPlusPlus/yt-lib.git
